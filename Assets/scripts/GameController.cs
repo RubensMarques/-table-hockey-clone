@@ -10,10 +10,11 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
-    public int scoreboard1, scoreboard2;
-    public TextMeshProUGUI sb1, sb2;
-    public GameObject goal;
+    public int scoreboard1, scoreboard2, scoreForWin;
+    public TextMeshProUGUI sb1Text, sb2Text, sfwText;
+    public GameObject goal, SFW;
     public GameObject[] win;
+    
 
 
 
@@ -28,6 +29,7 @@ public class GameController : MonoBehaviour
         else if(instance != this)
         {
             Destroy(gameObject);
+
         }
         RefreshScreen();
     }
@@ -36,9 +38,15 @@ public class GameController : MonoBehaviour
     void Update()
     {
         RefreshScreen();
-        if (scoreboard1 == 2 || scoreboard2 == 2)
+        FinalGame();
+    }
+
+    public void FinalGame()
+    {
+        if ((scoreboard1 == scoreForWin || scoreboard2 == scoreForWin) && scoreForWin != 0)
         {
-            if(scoreboard1 == 2)
+
+            if (scoreboard1 == scoreForWin)
             {
                 win[0].SetActive(true);
             }
@@ -46,6 +54,11 @@ public class GameController : MonoBehaviour
             {
                 win[1].SetActive(true);
             }
+        }
+
+        if (scoreForWin < 0)
+        {
+            scoreForWin = 0;
         }
     }
 
@@ -59,13 +72,34 @@ public class GameController : MonoBehaviour
     public void RefreshScreen()
     {
         
-        sb1.text = scoreboard1.ToString();
-        sb2.text = scoreboard2.ToString();
+        sb1Text.text = scoreboard1.ToString();
+        sb2Text.text = scoreboard2.ToString();
+        sfwText.text = scoreForWin.ToString();
     }
 
-    public void Congratulations()
+    public void Begin()
     {
-        SceneManager.LoadScene("final");
+        Destroy(gameObject);
+        SceneManager.LoadScene("partida");
+    }
+
+    
+
+    public void More()
+    {
+        scoreForWin++;
+    }
+    
+    public void Less()
+    {
+
+        scoreForWin--;
+
+    }
+
+    public void closeSFW()
+    {
+        SFW.SetActive(false);
     }
 
 

@@ -10,6 +10,7 @@ public class Goal : MonoBehaviour
     Animator anim;
     public Rigidbody2D rb;
     Collider2D col;
+    public AudioSource kick, screamGoal;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,29 +30,34 @@ public class Goal : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("goal1"))
         {
+            screamGoal.Play();
             GameController.instance.goal.SetActive(true);
             col.enabled = false;
             rb.velocity = new Vector2(0,0);
             anim.SetTrigger("goal");
-            Invoke("ShowGoal", 0.5f);
+            Invoke("ShowGoal", 0.7f);
             GameController.instance.scoreboard2++;
             
-
-
-
         }
 
         if (collision.gameObject.CompareTag("goal2"))
         {
+            screamGoal.Play();
             GameController.instance.goal.SetActive(true);
             col.enabled = false;
             rb.velocity = new Vector2(0, 0);
             anim.SetTrigger("goal");
-            Invoke("ShowGoal", 0.5f);
+            Invoke("ShowGoal", 0.7f);
             GameController.instance.scoreboard1++;
 
         }
 
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            kick.Play();
+        }
+
+       
         
     }
 

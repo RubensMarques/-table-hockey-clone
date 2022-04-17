@@ -15,7 +15,17 @@ public class Player2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxisRaw("HorizontalJoystick2")>0)
+        Move();
+        if ((GameController.instance.scoreboard1 == GameController.instance.scoreForWin || GameController.instance.scoreboard2 == GameController.instance.scoreForWin) && GameController.instance.scoreForWin != 0)
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
+
+    }
+
+    public void Move()
+    {
+        if (Input.GetAxisRaw("HorizontalJoystick2") > 0)
         {
             xAxis = 1;
         }
@@ -24,7 +34,7 @@ public class Player2 : MonoBehaviour
             xAxis = -1;
         }
 
-        if(Input.GetAxisRaw("VerticalJoystick2") > 0)
+        if (Input.GetAxisRaw("VerticalJoystick2") > 0)
         {
             yAxis = 1;
         }
@@ -37,16 +47,12 @@ public class Player2 : MonoBehaviour
         {
             xAxis = 0;
         }
-        
+
         if (Input.GetAxisRaw("VerticalJoystick2") == 0)
         {
             yAxis = 0;
         }
 
-        rb.velocity = new Vector2(xAxis * 13 * Time.deltaTime, yAxis * 13 * Time.deltaTime);
-        
-        
-
+        rb.velocity = new Vector2(xAxis * Time.deltaTime * 3000, yAxis * Time.deltaTime * 3000);
     }
-
 }
