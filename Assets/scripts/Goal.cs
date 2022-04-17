@@ -33,7 +33,7 @@ public class Goal : MonoBehaviour
             col.enabled = false;
             rb.velocity = new Vector2(0,0);
             anim.SetTrigger("goal");
-            Invoke("ShowGoal", 0.3f);
+            Invoke("ShowGoal", 0.5f);
             GameController.instance.scoreboard2++;
             
 
@@ -47,7 +47,7 @@ public class Goal : MonoBehaviour
             col.enabled = false;
             rb.velocity = new Vector2(0, 0);
             anim.SetTrigger("goal");
-            Invoke("ShowGoal", 0.3f);
+            Invoke("ShowGoal", 0.5f);
             GameController.instance.scoreboard1++;
 
         }
