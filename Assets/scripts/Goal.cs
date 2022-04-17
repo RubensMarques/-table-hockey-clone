@@ -7,10 +7,16 @@ public class Goal : MonoBehaviour
 {
     
     public GameObject goal;
+    Animator anim;
+    public Rigidbody2D rb;
+    Collider2D col;
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+
     }
 
     // Update is called once per frame
@@ -23,18 +29,27 @@ public class Goal : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("goal1"))
         {
-           
-            goal.SetActive(true);
-            Invoke("ShowGoal", 1f);
+            GameController.instance.goal.SetActive(true);
+            col.enabled = false;
+            rb.velocity = new Vector2(0,0);
+            anim.SetTrigger("goal");
+            Invoke("ShowGoal", 0.3f);
+            GameController.instance.scoreboard2++;
+            
+
 
 
         }
 
         if (collision.gameObject.CompareTag("goal2"))
         {
-            goal.SetActive(true);
-            Invoke("ShowGoal", 1f);
-          
+            GameController.instance.goal.SetActive(true);
+            col.enabled = false;
+            rb.velocity = new Vector2(0, 0);
+            anim.SetTrigger("goal");
+            Invoke("ShowGoal", 0.3f);
+            GameController.instance.scoreboard1++;
+
         }
 
         
@@ -42,6 +57,9 @@ public class Goal : MonoBehaviour
 
     public void ShowGoal()
     {
+        GameController.instance.goal.SetActive(false);
         SceneManager.LoadScene("partida");
     }
+
+    
 }

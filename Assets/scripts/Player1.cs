@@ -43,7 +43,7 @@ public class Player1 : MonoBehaviour
             yAxis = 0;
         }
 
-        rb.velocity = new Vector2(xAxis * 13, yAxis * 13);
+        rb.velocity = new Vector2(xAxis * Time.deltaTime * 3000, yAxis * Time.deltaTime * 3000);
         
         
 
