@@ -4,19 +4,31 @@ using UnityEngine;
 
 public class Player1 : MonoBehaviour
 {
+    public static Player1 pl1;
     public float xAxis=0, yAxis=0;
     public Rigidbody2D rb;
+    
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Dash();
+        
+        if (GameController.instance.SFW.active == true)
+        {
+            Stop();
+        }
+        else
+        {
+            Move();
+        }
+
         if ((GameController.instance.scoreboard1 == GameController.instance.scoreForWin || GameController.instance.scoreboard2 == GameController.instance.scoreForWin) && GameController.instance.scoreForWin != 0)
         {
             rb.velocity = new Vector2(0, 0);
@@ -53,14 +65,13 @@ public class Player1 : MonoBehaviour
             yAxis = 0;
         }
 
-        rb.velocity = new Vector2(xAxis * Time.deltaTime * 3000, yAxis * Time.deltaTime * 3000);
+        rb.velocity = new Vector2(xAxis * Time.deltaTime * 500, yAxis * Time.deltaTime * 500);
     }
 
-    public void Dash()
+    public void Stop()
     {
-        if (Input.GetButtonDown("X1"))
-        {
-            rb.velocity = new Vector2(xAxis * Time.deltaTime * 8000, rb.velocity.y);
-        }
+        rb.velocity = new Vector2(0, 0);
     }
+
+
 }

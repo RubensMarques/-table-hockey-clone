@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    
     public static GameController instance;
     public int scoreboard1, scoreboard2, scoreForWin;
     public TextMeshProUGUI sb1Text, sb2Text, sfwText;
@@ -32,11 +33,13 @@ public class GameController : MonoBehaviour
 
         }
         RefreshScreen();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         RefreshScreen();
         FinalGame();
     }
@@ -56,18 +59,18 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (scoreForWin < 0)
+        if (scoreForWin < 1)
         {
-            scoreForWin = 0;
+            scoreForWin = 1;
         }
     }
 
-    public void Restart()
+    public void StartGame()
     {
         SceneManager.LoadScene("partida");
-        
-        
+       
     }
+    
 
     public void RefreshScreen()
     {
@@ -102,6 +105,10 @@ public class GameController : MonoBehaviour
         SFW.SetActive(false);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
 
 
 }

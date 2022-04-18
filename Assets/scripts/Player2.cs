@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Player2 : MonoBehaviour
 {
+    public static Player2  pl2;
     public float xAxis=0, yAxis=0;
     public Rigidbody2D rb;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +17,17 @@ public class Player2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        
+
+        if (GameController.instance.SFW.active == true)
+        {
+            Stop();
+        }
+        else
+        {
+            Move();
+        }
+
         if ((GameController.instance.scoreboard1 == GameController.instance.scoreForWin || GameController.instance.scoreboard2 == GameController.instance.scoreForWin) && GameController.instance.scoreForWin != 0)
         {
             rb.velocity = new Vector2(0, 0);
@@ -53,6 +65,11 @@ public class Player2 : MonoBehaviour
             yAxis = 0;
         }
 
-        rb.velocity = new Vector2(xAxis * Time.deltaTime * 3000, yAxis * Time.deltaTime * 3000);
+        rb.velocity = new Vector2(xAxis * Time.deltaTime * 500, yAxis * Time.deltaTime * 500);
+    }
+
+    public void Stop()
+    {
+        rb.velocity = new Vector2(0, 0);
     }
 }
